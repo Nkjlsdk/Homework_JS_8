@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <style>
+        .btn {
+            background: blue;
+        }
+
+
+    </style>
+    <p class="super_element">Привет</p>
+
+    <img src="https://placeimg.com/50/50/animals" alt="">
+    <img src="https://placeimg.com/50/50/arch" alt="">
+    <img src="https://placeimg.com/50/50/nature" alt="">
+    <img src="https://placeimg.com/50/50/people" alt="">
+    <img src="https://placeimg.com/50/50/tech" alt="">
+    <img src="https://placeimg.com/50/50/tech/grayscale" alt="">
+    <img src="https://placeimg.com/50/50/tech/sepia" alt="">
+
+    <br>
+
+    <button>Кнопка</button>
+    <button class="super_element">Кнопка с классом btn</button>
+    <button>Кнопка</button>
+
+    <br>
+
+    <textarea></textarea>
+
+    <br>
+
+    <ul>
+        <li>
+            <button>Кнопка 1</button>
+        </li>
+        <li>
+            <button>Кнопка 2</button>
+        </li>
+        <li>
+            <button>Кнопка 3</button>
+        </li>
+        <li>
+            <button>Кнопка 4</button>
+        </li>
+    </ul>
+
+
+
+    <script>
+        console.log('Задача 1. Необходимо вывести сообщение в консоль "все теги прогрузились", когда все теги будут созданы браузером.');
+
+            document.addEventListener('DOMContentLoaded', function (e) {
+                console.log('все теги прогрузились');
+            });
+            console.log('');
+
+            console.log('Задача 2. Необходимо вывести сообщение в консоль "страница загрузилась", когда все ресурсы страницы будут загружены.');
+            window.addEventListener('load', function (e) {
+                console.log('cтраница загрузилась');
+            });
+            console.log('');
+
+            
+            console.log('Задача 3. При клике на какой-либо тег на странице в консоль должно выводиться сообщение наподобие: Класс "super_element" присутствует в элементе "div". сообщение должно определять присутствует или отсутствует класс "super_element" у элемента, а также выводить в нижнем регистре верный тег в данной строке, по которому был совершен клик.Необходимо использовать делегирование.');
+
+                const bodyAll = document.querySelectorAll('body');//массив элементов                
+                    bodyAll.forEach((elem) => {
+                        elem.addEventListener('click', function (e) {
+                            // console.log(e);//все событие
+                            // console.log(e.srcElement.nodeName);//название узла
+                            // console.log(e.target.textContent);//текст в теге                        
+                            // console.log(e.target.classList);//массив классов привязанных к тегу
+                            // console.log(e.target.classList.contains('button4'));//проверит содержится ли этот класс в теге
+                            // console.log(e.target.classList[1]);//выведет название второго класса
+                            if (e.target.classList.contains('super_element')) {
+                                console.log(`Задача 3: Класс "super_element" присутствует в элементе, ${e.srcElement.nodeName}`);
+                                // console.log(e.target);//Весь тег
+                                console.log(`Задача 3, ${e.srcElement.nodeName.toLowerCase()}`);//тег
+                            } else {
+                                console.log(`Задача 3: Класса "super_element" нет в элементе, ${e.srcElement.nodeName}`);
+                                console.log(e.target);//Весь тег
+                                console.log(`Задача 3, ${e.srcElement.nodeName.toLowerCase()}`);//тег
+                            }
+                        });
+                    });
+                    console.log('');
+
+                    console.log('Задача 4. Сделайте, чтобы при наведении на textarea в консоли появлялось сообщение:"Вы навели на textarea."');
+
+                    const textarea = document.querySelector('textarea');
+                    textarea.addEventListener('mouseover', function (e) {
+                        console.log('Вы навели на textarea');
+                    });
+                    console.log('');
+
+                    console.log('Задача 5. Необходимо повесить событие клика на тег ul. В обработчике события в консоль необходимо выводить текст, который записан внутри элемента кнопки,по которой был произведен клик.Если клик был не по кнопке, то ничего выводить не нужно.Необходимо использовать делегирование');
+
+                        const ul = document.querySelector('ul');
+                        const button = document.querySelector('button');
+
+                        ul.addEventListener('click', function (e) {
+                            if (e.srcElement.nodeName.toLowerCase() == 'button') {
+                                console.log(`Задача 5: ${e.target.textContent}`);
+                            }
+                        });
+                        console.log('');
+
+                        console.log('Задача 6. Вопрос: Почему в console.log пишется сначала текст из 5 задания и только потом выводится текст из 3 задания, если мы кликаем по кнопкам в ul? Ответ необходимо написать здесь же, под этим комментарием, своими словами.');
+
+                        console.log('Обработчик события создан на общий родительский элемент "UL". Событие делегируется от родителя к дочерним элементам. Но делегирование это три этапа: захват, срабатывание, всплытие. Причина, видимо, обработчик закреплен на родителский элемент и при нажатии ослеживает всплывающее событие');
+                        const ulAll = document.querySelectorAll('ul');
+                            ulAll.forEach((elem) => {
+                                elem.addEventListener('click', function (e) {
+                                    console.log(`Задача 6, ${e}, ${e.target.textContent}, ${e.srcElement.nodeName.toLowerCase()}`);
+                                    console.log(`Задача 6, ${e}`);
+                                    console.log(`Задача 6, ${e.target.textContent}`);
+                                    console.log(`Задача 6, ${e.srcElement.nodeName.toLowerCase()}`);
+                                });
+                            });
+                            console.log('');
+
+                                console.log('Задача 7. С помощью JS необходимо изменить цвет заднего фона каждого второго тега li');
+
+                                const btn = document.createElement('button');
+                                btn.textContent = 'изментить фон в списке';
+                                ul.appendChild(btn);
+                                const li = document.querySelectorAll('li');
+                                li.forEach((elem, i, arr) => {
+                                    for (let i = 0; i <= 3; i++) {
+                                        if (i % 2 != 0) {
+                                            btn.addEventListener('click', function (e) {
+                                                // arr[i].classList.add('btn');//Здесь не поняла условие задачи, написано изменить цвет фона li, можно убрать комментарий будет цвет фона
+                                                const btns = li[i].querySelector('button');//или цвет кнопки
+                                                btns.classList.add('btn');
+                                            });
+                                        }
+                                    }
+                                });
+                                "use strict";
+    </script>
+</body>
+</html>
